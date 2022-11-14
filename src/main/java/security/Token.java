@@ -35,7 +35,7 @@ public class Token {
         Date date = new Date();
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                 .subject(username)
-                //.claim("username", username)
+                .claim("username", username)
                 .claim("roles", rolesAsString)
                 .issueTime(date)
                 .expirationTime(new Date(date.getTime() + TOKEN_EXPIRE_TIME))

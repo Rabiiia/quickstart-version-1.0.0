@@ -1,0 +1,12 @@
+####
+
+POST https://acmverden.dk/tomcat/CA2/api/user
+
+{
+    "username": "rabia",
+    "password": "123",
+    "roles": [
+        "admin",
+        "user"
+    ]
+}

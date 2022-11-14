@@ -20,6 +20,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
+
+import facades.Populator;
 import security.UserPrincipal;
 
 import externalAPIHandling.JokeFetcher;
@@ -96,5 +98,14 @@ public class DemoResource {
 
         return gson.toJson(futureList);
     }
+
+
+
+//    @Path("/populate")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public void populate() {
+//        Populator.populate();
+//    }
 
 }

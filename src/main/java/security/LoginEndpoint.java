@@ -54,10 +54,20 @@ public class LoginEndpoint {
         System.out.println(username  + " " + password);
 
         try {
+//            User user = USER_FACADE.getVeryfiedUser(username, password);
+//            String token = new Token(username, user.getRolesAsStrings()).toString();
+//            System.out.println(token);
+//            return Response.ok(GSON.toJson(token)).build();
+
+
             User user = USER_FACADE.getVeryfiedUser(username, password);
-            String token = new Token(username, user.getRolesAsStrings()).toString();
-            System.out.println(token);
-            return Response.ok(GSON.toJson(token)).build();
+            String token = new Token(username, user.getRolesAsStrings()).toString(); //bruger token her
+            //createToken(username, user.getRolesAsStrings());
+            JsonObject responseJson = new JsonObject();
+            responseJson.addProperty("username", username);
+            responseJson.addProperty("token", token);
+            return Response.ok(new Gson().toJson(responseJson)).build();
+
 
         } catch (JOSEException | AuthenticationException ex) {
             if (ex instanceof AuthenticationException) {

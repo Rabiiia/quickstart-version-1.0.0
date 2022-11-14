@@ -182,7 +182,7 @@ public class LoginEndpointTest {
                 .when()
                 .get("/info/admin").then()
                 .statusCode(200)
-                .body("msg", equalTo("Hello to (admin) User: user_admin"));
+                .body("msg", equalTo("{\"username\": \"user_admin\",\"role\":\"user_admin\"}"));
     }
 
     @Test

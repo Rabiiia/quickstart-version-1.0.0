@@ -66,7 +66,7 @@ public class TokenEndpoint {
             System.out.println("Token is valid");
             String username = signedJWT.getJWTClaimsSet().getSubject();
             User user = USER_FACADE.getUser(username); // <--- getUser. Added a method in userFacade
-            return Response.ok(GSON.toJson(new Token(username, user.getRolesAsStrings()).toString())).build();
+            return Response.ok(GSON.toJson(new Token(username, user.getRolesAsStrings()).toString())).build(); // bruger token her
         } catch (ParseException e) {
             System.out.println("ParseException:");
             throw new RuntimeException(e);
