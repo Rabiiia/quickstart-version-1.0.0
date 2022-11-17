@@ -94,8 +94,8 @@ public class LoginEndpointTest {
     private static String securityToken;
 
     //Utility method to login and set the returned securityToken
-    private static void login(String role, String password) {
-        String json = String.format("{\"username\": \"%s\", \"password\": \"%s\"}", role, password);
+    private static void login(String username, String password) {
+        String json = String.format("{\"username\": \"%s\", \"password\": \"%s\"}", username, password);
         securityToken = given()
                 .contentType("application/json")
                 .body(json)
@@ -135,7 +135,7 @@ public class LoginEndpointTest {
                 .when()
                 .get("/info/admin").then()
                 .statusCode(200)
-                .body("msg", equalTo("Hello to (admin) User: admin"));
+                .body("username", equalTo("admin"));
     }
 
     @Test
@@ -182,7 +182,7 @@ public class LoginEndpointTest {
                 .when()
                 .get("/info/admin").then()
                 .statusCode(200)
-                .body("msg", equalTo("{\"username\": \"user_admin\",\"role\":\"user_admin\"}"));
+                .body("username", equalTo("user_admin"));
     }
 
     @Test
