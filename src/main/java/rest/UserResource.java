@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import dtos.UserDTO;
 import entities.User;
 import errorhandling.API_Exception;
 import facades.UserFacade;
@@ -38,14 +39,11 @@ public class UserResource {
             JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
             username = jsonObject.get("username").getAsString();
             password = jsonObject.get("password").getAsString();
-            for (JsonElement role : jsonObject.get("roles").getAsJsonArray()){
-                roles.add(role.getAsString());
-            }
         } catch (Exception e) {
             throw new API_Exception("Malformed JSON Supplied", 400, e);
         }
 
-        User user = USER_FACADE.createUser(username, password, roles);
+        UserDTO user = new UserDTO(USER_FACADE.createUser(username, password));
         String userJSON = GSON.toJson(user);
         System.out.println(userJSON);
         return Response.ok(userJSON).build();

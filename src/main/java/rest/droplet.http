@@ -1,6 +1,28 @@
-####
 
+### BEFORE YOU CAN POST USER ON YOUR DROPLET DATABASE
+    FIRST PUSH SO THAT YOUR CURRENT JAVA APP IS DEPLOYED ON YOUR TOMCAT SERVER ON YOUR DROPLET
+### IF ITS SUCCESFULLY DEPLOYED THEN:
+
+###
+replace xxx with your domain name
+###
+replace QQ with your artifactId which you wrote in pom xml
+
+###
+replace username and password after your own taste. Preferably your own name and nice code
+
+###
+Press POST and it should create the user on your droplet database which has BOTH admin and role rights
+
+###
+if you want another user with different password who at the same ONLY has an USER ROLE,
+###
+then delete "admin" in "roles: [admin,]" and press post
+
+
+###
 POST https://acmverden.dk/tomcat/CA2/api/user
+Content-Type: application/json
 
 {
     "username": "rabia",
@@ -10,3 +32,4 @@ POST https://acmverden.dk/tomcat/CA2/api/user
         "user"
     ]
 }
+

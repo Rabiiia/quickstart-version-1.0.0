@@ -8,6 +8,8 @@ import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -62,7 +64,8 @@ public class UserFacadeTest {
         String name = "Zack";
         String password = "Test123";
 
-        userFacade.getVeryfiedUser(name,password);
+        // hvis user er null, fejler testen
+        assertNotNull(userFacade.getVeryfiedUser(name,password));
 
 
     }

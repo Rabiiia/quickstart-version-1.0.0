@@ -45,7 +45,9 @@ public class User implements Serializable {
 
   //TODO Change when password is hashed
    public boolean verifyPassword(String pw){
-        return BCrypt.checkpw(pw,userPass);
+     //System.out.println("Password from JSON: " + pw);
+     //System.out.println("Password from DB: " + userPass);
+     return BCrypt.checkpw(pw,userPass);
     }
 
   public User(String userName, String userPass) {
@@ -83,4 +85,10 @@ public class User implements Serializable {
     roleList.add(userRole);
   }
 
+  public static void main(String[] args) {
+    User user = new User("test_user", "123");
+    //user.verifyPassword("123");
+    System.out.println( user.verifyPassword("123"));
+  }
 }
+
