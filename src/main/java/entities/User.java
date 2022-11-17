@@ -47,7 +47,10 @@ public class User implements Serializable {
    public boolean verifyPassword(String pw){
      //System.out.println("Password from JSON: " + pw);
      //System.out.println("Password from DB: " + userPass);
-     return BCrypt.checkpw(pw,userPass);
+     System.out.println(userPass);
+     boolean hej = BCrypt.checkpw(pw,userPass);
+     System.out.println(hej);
+     return hej;
     }
 
   public User(String userName, String userPass) {

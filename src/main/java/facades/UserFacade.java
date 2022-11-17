@@ -43,6 +43,7 @@ public class UserFacade {
         User user;
         try {
             user = em.find(User.class, username);
+            System.out.println(user);
             //System.out.println("Here in getVeryfiedUser " + user.getUserName() + " " + user.getUserPass());
             //System.out.println("Here password in getVeryfiedUser " + password + " " + user.verifyPassword(password));
             if (user == null || !user.verifyPassword(password)) {
@@ -78,8 +79,7 @@ public class UserFacade {
     // når man så er færdig med at samlet User objekt, så kan jeg lave det om til UserDTO.
     // LIGE NU bruger vi createUser metoden som returnerer et entity objekt, men det bliver lavet om til userDTO i Userresource i rest
     public User createUser(String username, String password) throws API_Exception {
-        // Encrypt password:
-        password = BCrypt.hashpw(password, BCrypt.gensalt());
+
 
         // Construct user:
         User user = new User(username, password);

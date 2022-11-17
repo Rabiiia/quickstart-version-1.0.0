@@ -12,12 +12,10 @@ replace QQ with your artifactId which you wrote in pom xml
 replace username and password after your own taste. Preferably your own name and nice code
 
 ###
-Press POST and it should create the user on your droplet database which has BOTH admin and role rights
+Press POST and it should create the user on your droplet database which has user role.
 
 ###
-if you want another user with different password who at the same ONLY has an USER ROLE,
-###
-then delete "admin" in "roles: [admin,]" and press post
+YOU must create ADMIN manualt on your droplet database.
 
 
 ###
@@ -26,10 +24,7 @@ Content-Type: application/json
 
 {
     "username": "rabia",
-    "password": "123",
-    "roles": [
-        "admin",
-        "user"
-    ]
+    "password": "123"
+
 }
 
