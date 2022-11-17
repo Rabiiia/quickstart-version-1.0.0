@@ -13,4 +13,8 @@ public class UserDTO {
         this.name = user.getUserName();
         this.roles = user.getRolesAsStrings();
     }
+
+    public List<String> getRoles() {
+        return roles;
+    }
 }

@@ -60,8 +60,8 @@ public class LoginEndpoint {
 //            return Response.ok(GSON.toJson(token)).build();
 
 
-            User user = USER_FACADE.getVeryfiedUser(username, password);
-            String token = new Token(username, user.getRolesAsStrings()).toString(); //bruger token her
+            UserDTO user = new UserDTO(USER_FACADE.getVeryfiedUser(username, password));
+            String token = new Token(username, user.getRoles()).toString(); //bruger token her
             //createToken(username, user.getRolesAsStrings());
             JsonObject responseJson = new JsonObject();
             responseJson.addProperty("username", username);
