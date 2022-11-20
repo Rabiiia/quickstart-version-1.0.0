@@ -32,15 +32,8 @@ import static security.LoginEndpoint.USER_FACADE;
 
 @Path("verify")
 public class TokenEndpoint {
-
-
-
-    @Context
-    SecurityContext securityContext;
-
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final UserFacade USER_FACADE = UserFacade.getUserFacade(EMF);
-    private static final Gson GSON = new Gson();
 
     //http://localhost:8080/api/verify GET
     //when GETTING with token: "bcrypt" it should get admin and admins roles or token is not valid
@@ -51,9 +44,8 @@ public class TokenEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response verifyToken(@HeaderParam("x-access-token") String token) throws AuthenticationException {
+        // The token is given as the header "x-access-token" in the request, so we get it with a @HeaderParam annotation
         System.out.println("Token: " + token);
-        //x-access-token is replacing token. because it is already written in apiFacade.js frontend
-        //@HeaderParam takes one of the requests headers and use it to verify token - > expired or not
 
         try {
             SignedJWT signedJWT = SignedJWT.parse(token);
@@ -64,18 +56,19 @@ public class TokenEndpoint {
                 }
             }
             System.out.println("Token is valid");
-            String username = signedJWT.getJWTClaimsSet().getSubject();
-            User user = USER_FACADE.getUser(username); // <--- getUser. Added a method in userFacade
-            return Response.ok(GSON.toJson(new Token(username, user.getRolesAsStrings()).toString())).build(); // bruger token her
+            String username = signedJWT.getJWTClaimsSet().getSubject(); // or .getClaim("username").toString();
+            User user = USER_FACADE.getUser(username);
+            SignedJWT renewedToken = Token.createToken(username, user.getRolesAsStrings());
+            JsonObject responseJson = new JsonObject();
+            responseJson.addProperty("username", username);
+            responseJson.addProperty("token", renewedToken.serialize());
+            return Response.ok(responseJson.toString()).build();
         } catch (ParseException e) {
-            System.out.println("ParseException:");
+            System.out.println("ParseException: " + e.getMessage());
             throw new RuntimeException(e);
         } catch (JOSEException e) {
-            System.out.println("JOSEException:");
+            System.out.println("JOSEException: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
-
-
-
 }

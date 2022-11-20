@@ -11,19 +11,12 @@ import com.nimbusds.jwt.SignedJWT;
 import java.util.Date;
 import java.util.List;
 
-
-// We have pasted already existing code from LoginEndPoint and pasted in this new class we created
-// This is a class which creates a token
+// We have moved createdToken from LoginEndPoint into its own class
+// so we can use the methods in more than just one endpoint
 public class Token {
-
     public static final int TOKEN_EXPIRE_TIME = 1000 * 60 * 30; //30 min
-    private final String TOKEN;
 
-    public Token(String username, List<String> roles) throws JOSEException {
-        TOKEN = createToken(username, roles);
-    }
-
-    public static String createToken(String username, List<String> roles) throws JOSEException {
+    public static SignedJWT createToken(String username, List<String> roles) throws JOSEException {
         StringBuilder res = new StringBuilder();
         for (String string : roles) {
             res.append(string);
@@ -42,11 +35,6 @@ public class Token {
                 .build();
         SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.HS256), claimsSet);
         signedJWT.sign(signer);
-        return signedJWT.serialize();
-    }
-
-    public String toString() {
-        return TOKEN;
+        return signedJWT;
     }
 }
-
