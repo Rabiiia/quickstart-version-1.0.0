@@ -6,7 +6,7 @@
 ###
 replace xxx with your domain name
 ###
-replace QQ with your artifactId which you wrote in pom xml
+replace the next xxx with your artifactId which you wrote in pom xml
 
 ###
 replace username and password after your own taste. Preferably your own name and nice code
@@ -19,12 +19,12 @@ YOU must create ADMIN manualt on your droplet database.
 
 
 ###
-POST https://acmverden.dk/tomcat/CA2/api/user
+POST https://xxx/xxx/api/user
 Content-Type: application/json
 
 {
-    "username": "rabia",
-    "password": "test123"
+    "username": "yourname",
+    "password": "yourcode"
 
 }
 
