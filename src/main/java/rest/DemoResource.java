@@ -32,7 +32,7 @@ import utils.EMF_Creator;
  */
 @Path("info")
 public class DemoResource {
-    
+    //kk
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private final Gson gson = new Gson();
     @Context
